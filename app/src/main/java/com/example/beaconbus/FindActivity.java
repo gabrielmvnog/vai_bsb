@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -61,14 +62,16 @@ public class FindActivity extends AppCompatActivity implements BeaconConsumer {
         beaconManager.bind(this);
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         beaconManager.unbind(this);
     }
+
     @Override
     public void onBeaconServiceConnect() {
-        final Region region = new Region("myBeacons", null, null, null);
+        final Region region = new Region("FindBeacons", null, null, null);
 
         beaconManager.removeAllMonitorNotifiers();
         beaconManager.addMonitorNotifier(new MonitorNotifier() {
@@ -119,6 +122,7 @@ public class FindActivity extends AppCompatActivity implements BeaconConsumer {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
     }
 
     private void updateBeacons(){

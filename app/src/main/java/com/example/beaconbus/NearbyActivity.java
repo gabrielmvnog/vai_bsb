@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -48,15 +49,12 @@ public class NearbyActivity extends AppCompatActivity implements BeaconConsumer 
 
     @Override
     public void onBeaconServiceConnect() {
-        final Region region = new Region("myBeacons", null, null, null);
+        final Region region = new Region("NearbyBeacons", null, null, null);
 
         beaconManager.removeAllRangeNotifiers();
         beaconManager.addRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                Log.d(TAG, "Beacons find: " + beacons.size());
-
-
                 for(Beacon oneBeacon : beacons) {
                     if (oneBeacon.getDistance() < 0.3){
 
@@ -96,14 +94,16 @@ public class NearbyActivity extends AppCompatActivity implements BeaconConsumer 
                         alert.show();
                     }
                 }
-
             }
         });
+
 
         try {
             beaconManager.startMonitoringBeaconsInRegion(region);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
     }
+
 }
