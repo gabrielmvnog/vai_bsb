@@ -52,7 +52,7 @@ public class BeaconAdapter extends  RecyclerView.Adapter<BeaconAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.distance.setText(String.format( "%.2f",Beacon_list.get(position).getDistance()) + " metros");
+        holder.distance.setText(String.format( "%.2f",Beacon_list.get(position).getDistance()));
         holder.beaconId.setText("" + Beacon_list.get(position).getId1());
 
     }

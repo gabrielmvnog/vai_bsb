@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity  {
         });
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.google.com";
+        String url ="http://ec2-18-191-91-33.us-east-2.compute.amazonaws.com:5000/api/get_balance/1";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity  {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        balance_text.setText("R$ 9.90");
+                        balance_text.setText( "R$ " + String.format( "%.2f", Double.parseDouble(response) ) );
                     }
                 }, new Response.ErrorListener() {
             @Override
